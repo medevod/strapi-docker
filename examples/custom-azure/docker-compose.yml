@@ -1,10 +1,13 @@
-
 version: "3"
 
 services:
   strapi:
-    container_name: evodim-strapi-azure
-    image: evodim/strapi-azure
+    container_name: strapi-azure-container
+    image: evodim/strapi-azure:preview
+    volumes:
+      - ./app/api:/srv/app/api
+      - ./app/components:/srv/app/components
+      - /app/extensions:srv/app/extensions
     environment:
       - DATABASE_CLIENT=${DATABASE_CLIENT}
       - DATABASE_HOST=${DATABASE_HOST}
@@ -12,14 +15,14 @@ services:
       - DATABASE_NAME=${DATABASE_NAME}
       - DATABASE_USERNAME=${DATABASE_USERNAME}
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
-      - DATABASE_SSL=${DATABASE_SSL}   
-      - STORAGE_ACCOUNT=${STORAGE_ACCOUNT}  
-      - STORAGE_ACCOUNT_KEY=${STORAGE_ACCOUNT_KEY}  
-      - STORAGE_URL=${STORAGE_URL}  
-      - STORAGE_CONTAINER_NAME=${STORAGE_CONTAINER_NAME}  
-      - STORAGE_CDN_URL=${STORAGE_CDN_URL}  
-      - STORAGE_DEFAULT_PATH=${STORAGE_DEFAULT_PATH}  
-      - STORAGE_MAX_CONCURRENT=${STORAGE_MAX_CONCURRENT}   
+      - DATABASE_SSL=${DATABASE_SSL}
+      - STORAGE_ACCOUNT=${STORAGE_ACCOUNT}
+      - STORAGE_ACCOUNT_KEY=${STORAGE_ACCOUNT_KEY}
+      - STORAGE_URL=${STORAGE_URL}
+      - STORAGE_CONTAINER_NAME=${STORAGE_CONTAINER_NAME}
+      - STORAGE_CDN_URL=${STORAGE_CDN_URL}
+      - STORAGE_DEFAULT_PATH=${STORAGE_DEFAULT_PATH}
+      - STORAGE_MAX_CONCURRENT=${STORAGE_MAX_CONCURRENT}
     ports:
       - 1337:1337
     restart: unless-stopped
